@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Eliminar</h1>
+<div mat-dialog-content>
+    <p>Esta seguro que desea eliminar el pokemon?</p>
+</div>
+<div mat-dialog-actions>
+    <button type="button" (click)="close()" mat-button>No gracias</button>
+    <button mat-button cdkFocusInitial (click)="eliminarPokemon()">Si</button>
+</div>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+<simple-notifications></simple-notifications>

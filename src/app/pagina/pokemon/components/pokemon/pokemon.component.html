@@ -1,0 +1,83 @@
+<mat-card>
+    <mat-card-title>POKEMONES</mat-card-title>
+    <mat-card-content>
+        <div class="flex-box">
+            <div class="example-button-row">
+                <button (click)="abrirModalDinamimco()" mat-button color="primary">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+                    Crear Pokemon
+                </button>
+
+            </div>
+            <mat-form-field appearance="standard">
+                <mat-label>Pokemones</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="buscar..." #input>
+            </mat-form-field>
+        </div>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                </ng-container>
+
+                <!-- imagen Column -->
+                <ng-container matColumnDef="image">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Imagen </th>
+                    <!-- <img mat-cell *matCellDef="let row"> {{row.image}}% </im> -->
+                    <td mat-cell *matCellDef="let row"> <img class="pokemon__imagen" src="{{row.image}}" alt=""> </td>
+
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                </ng-container>
+
+                <!-- ataque Column -->
+                <ng-container matColumnDef="attack">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Ataque </th>
+                    <td mat-cell *matCellDef="let row"> {{row.attack}} </td>
+                </ng-container>
+
+                <!-- defensa Column -->
+                <ng-container matColumnDef="defense">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Defensa </th>
+                    <td mat-cell *matCellDef="let row"> {{row.defense}} </td>
+                </ng-container>
+
+                <!-- defensa Column -->
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div class="example-button-row">
+
+                            <button mat-button (click)="abrirModalDinamimco(row)" color="alert">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">create</mat-icon>
+                            </button>
+                            <button (click)="abrirEliminar(row.id)" mat-button color="warn">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">delete_sweep</mat-icon>
+                            </button>
+
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[ 10,15, 25, 100]" aria-label="Select page of users">
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>
+<simple-notifications></simple-notifications>

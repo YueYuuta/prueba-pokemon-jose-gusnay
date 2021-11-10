@@ -1,0 +1,56 @@
+table {
+  width: 100%;
+}
+
+/* .mat-form-field {
+  font-size: 14px;
+  width: 100%;
+} */
+
+td,
+th {
+  width: 12%;
+}
+
+.pokemon__imagen {
+  height: 50px;
+  width: 50px;
+}
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+div.flex-box {
+  display: flex;
+  justify-content: space-between;
+  /* border: 2px deeppink dashed; */
+}
+
+div.flex-box2 {
+  display: flex;
+  justify-content: flex-start;
+  /* border: 2px deeppink dashed; */
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
