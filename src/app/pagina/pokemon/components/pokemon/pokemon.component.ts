@@ -10,6 +10,7 @@ import { NotificationsService, NotificationType } from 'angular2-notifications';
 import { ModalConfirmarComponent } from '../modal-confirmar/modal-confirmar.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-pokemon',
@@ -35,7 +36,8 @@ export class PokemonComponent implements OnInit, OnDestroy {
   constructor(
     private readonly _pokemonService: PokemonService,
     public dialog: MatDialog,
-    private _notiService: NotificationsService
+    private _notiService: NotificationsService,
+    private spinner: NgxSpinnerService
   ) {
     this.obtenerPokemones();
   }
@@ -45,15 +47,22 @@ export class PokemonComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   private obtenerPokemones(): void {
+    this.spinner.show();
     this._pokemonService
       .obtenerPokemones()
       .pipe(takeUntil(this.stop$))
-      .subscribe((pokemones) => {
-        this.total = pokemones.length;
-        this.dataSource = new MatTableDataSource(pokemones);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
+      .subscribe(
+        (pokemones) => {
+          this.spinner.hide();
+          this.total = pokemones.length;
+          this.dataSource = new MatTableDataSource(pokemones);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        (err) => {
+          this.spinner.hide();
+        }
+      );
   }
 
   // ngAfterViewInit() {
