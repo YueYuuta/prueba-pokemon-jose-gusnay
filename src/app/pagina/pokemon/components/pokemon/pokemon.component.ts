@@ -71,11 +71,13 @@ export class PokemonComponent implements OnInit, OnDestroy {
   // }
 
   abrirEliminar(id: number): void {
+    this.spinner.show();
     this._pokemonService
       .obtenerPokemonPorId(id)
       .pipe(takeUntil(this.stop$))
       .subscribe(
         (response) => {
+          this.spinner.hide();
           const dialogRef = this.dialog.open(ModalConfirmarComponent, {
             width: '250px',
             data: { id },
@@ -101,6 +103,7 @@ export class PokemonComponent implements OnInit, OnDestroy {
             });
         },
         (err) => {
+          this.spinner.hide();
           this._notiService.create(
             'Error',
             `${err.error.error}`,
